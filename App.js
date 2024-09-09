@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: 'center',
+    flexDirection:1
   },
   text: {
     color: 'white',
