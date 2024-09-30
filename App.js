@@ -1,26 +1,22 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import Splash from "./screens/Splash";
 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
-  return (
-      <ImageBackground source={require("./assets/Beige Minimal Pet Dog Instagram Story.jpg")} 
-      blurRadius={3} style={{flex:1, justifyContent:'center'}} resizeMode='center' >
-        <Text style={styles.text}></Text>
-      </ImageBackground>
-    
-  );
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+
+  return <NavigationContainer>
+
+    <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen options={{
+        headerShown: false
+      }} name="Splash" component={Splash} />
+
+</Stack.Navigator>
+</NavigationContainer>
 }
 
-const styles = StyleSheet.create({
-
-  text: {
-    color: 'white',
-    fontSize: 42,
-    lineHeight: 84,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: '#000000c0',
-  },
-});
+export default App ;
