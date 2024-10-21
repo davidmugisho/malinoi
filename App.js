@@ -17,11 +17,12 @@ const App = () => {
       <Stack.Screen options={{
         headerShown: false
       }} name="Splash" component={Splash} />
+
          <Stack.Screen name="Signup" component={Signup} options={{
         headerShown: false
       }} />
 
-      <Stack.Screen name="Login" component={Login} options={{
+<Stack.Screen name="Login" component={Login} options={{
         headerShown: false
       }} />
 
