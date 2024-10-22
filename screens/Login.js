@@ -69,7 +69,7 @@ const Login = ({ navigation }) => {
                 }}
                 onChangeText={setEmail}
                 value={email}
-                placeholder="mary.elliot@mail.com"
+                placeholder="dav.mug@mail.com"
             />
 
 
@@ -100,7 +100,7 @@ const Login = ({ navigation }) => {
                 navigation.navigate('Signup')
             }}
             >
-                <Text>Do you want to sign up? </Text>
+                <Text style={{color:'red'}}>Do you want to sign up? </Text>
 
             </TouchableOpacity>
 
