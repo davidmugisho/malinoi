@@ -113,6 +113,128 @@
 
 // export default Login;
 
+
+
+
+
+// try first API waiting for the approve
+
+
+
+
+// import React, { useState } from 'react';
+// import { View, Text, TextInput, Button, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+// import axios from 'axios';
+
+// const Login = ({ navigation }) => {
+//     console.log('Login screen loaded');
+
+//     // REACT HOOK
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [error, setError] = useState('');
+//     const [loading, setLoading] = useState(false); // Added loading state
+
+//     // Create a function to Log in
+//     const LoginHandler = () => {
+//         setLoading(true);  // Show loading spinner
+//         axios.post('http://test.ecoforest.green/api/v1/auth/login', {
+//             email: email,
+//             password: password
+//         })
+//         .then(function (response) {
+//             setError('');
+//             setLoading(false);  // Hide loading spinner
+
+//             // Navigate to the Main Screen after successful login
+//             navigation.navigate('Main', {
+//                 user: response.data.user,
+//                 token: response.data.token
+//             });
+//         })
+//         .catch(function (error) {
+//             setLoading(false);  // Hide loading spinner
+//             if (error.response) {
+//                 const { data } = error.response;
+//                 console.log('error: ', data?.message || 'An error occurred');
+//                 setError(data?.message || 'Login failed, please try again');
+//             } else {
+//                 console.log('Network error: ', error.message);
+//                 setError('Network error, please check your connection');
+//             }
+//         });
+//     };
+
+//     return (
+//         <View style={{
+//             backgroundColor: '#eee',
+//             flex: 1,
+//             padding: 20,
+//             alignItems: 'center'
+//         }}>
+//             <Text style={{ fontWeight: 'bold' }}>
+//                 Welcome back!
+//             </Text>
+//             <Image style={{ height: 200, width: 200, alignSelf: 'center' }}
+//                 source={require('../assets/welcome.jpg')} />
+
+//             <View style={{ width: '100%' }}>
+//                 <Text>Email</Text>
+//                 <TextInput
+//                     style={{
+//                         padding: 10,
+//                         borderRadius: 15,
+//                         backgroundColor: '#fff',
+//                         width: '100%',
+//                         fontWeight: 'bold'
+//                     }}
+//                     onChangeText={setEmail}
+//                     value={email}
+//                     placeholder="dav.mug@mail.com"
+//                     keyboardType="email-address"
+//                     autoCapitalize="none"
+//                 />
+
+//                 <Text>Password</Text>
+//                 <TextInput
+//                     style={{
+//                         padding: 10,
+//                         borderRadius: 15,
+//                         backgroundColor: '#fff',
+//                         width: '100%',
+//                         fontWeight: 'bold'
+//                     }}
+//                     onChangeText={setPassword}
+//                     value={password}
+//                     placeholder="*********"
+//                     secureTextEntry
+//                 />
+
+//                 <Text style={{ color: 'red', marginVertical: 10 }}>{error}</Text>
+
+//                 {/* Display loading spinner when logging in */}
+//                 {loading ? (
+//                     <ActivityIndicator size="large" color="#007bff" />
+//                 ) : (
+//                     <Button 
+//                         title="LOGIN" 
+//                         onPress={LoginHandler} 
+//                     />
+//                 )}
+
+//                 <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+//                     <Text style={{ color: 'red', marginTop: 10 }}>Do you want to sign up?</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         </View>
+//     );
+// };
+
+// export default Login;
+
+
+// use a public API reqrest 
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import axios from 'axios';
@@ -126,10 +248,10 @@ const Login = ({ navigation }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false); // Added loading state
 
-    // Create a function to Log in
+    // Create a function to Log in using Reqres API
     const LoginHandler = () => {
         setLoading(true);  // Show loading spinner
-        axios.post('http://test.ecoforest.green/api/v1/auth/login', {
+        axios.post('https://reqres.in/api/login', {
             email: email,
             password: password
         })
@@ -139,16 +261,15 @@ const Login = ({ navigation }) => {
 
             // Navigate to the Main Screen after successful login
             navigation.navigate('Main', {
-                user: response.data.user,
-                token: response.data.token
+                token: response.data.token  // Pass the token to the Main page
             });
         })
         .catch(function (error) {
             setLoading(false);  // Hide loading spinner
             if (error.response) {
                 const { data } = error.response;
-                console.log('error: ', data?.message || 'An error occurred');
-                setError(data?.message || 'Login failed, please try again');
+                console.log('error: ', data?.error || 'An error occurred');
+                setError(data?.error || 'Login failed, please try again');
             } else {
                 console.log('Network error: ', error.message);
                 setError('Network error, please check your connection');
@@ -181,7 +302,7 @@ const Login = ({ navigation }) => {
                     }}
                     onChangeText={setEmail}
                     value={email}
-                    placeholder="dav.mug@mail.com"
+                    placeholder="eve.holt@reqres.in"
                     keyboardType="email-address"
                     autoCapitalize="none"
                 />
@@ -197,7 +318,7 @@ const Login = ({ navigation }) => {
                     }}
                     onChangeText={setPassword}
                     value={password}
-                    placeholder="*********"
+                    placeholder="cityslicka"
                     secureTextEntry
                 />
 
