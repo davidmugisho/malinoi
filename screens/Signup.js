@@ -100,7 +100,7 @@ const Signup = ({navigation}) => {
 
             {/* TODO : confirmPassword */}
             <Text style={{ color: 'red' }}>{error}</Text>
-            <Button style={{ marginTop: 10 }} title="Get Started" onPress={() => {
+            <Button style={{ marginTop: 10 , padding: 20}} title="Get Started" onPress={() => {
                 console.log('ok');
                 signupHandler();
             }} ></Button>

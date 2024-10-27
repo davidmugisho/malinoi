@@ -66,7 +66,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 
 const Main = ({ navigation, route }) => {
     const user = route?.params?.user || { full_name: 'Guest' };
@@ -88,7 +88,7 @@ const Main = ({ navigation, route }) => {
                 </Text>
             </View>
 
-            <View style={{ padding: 20 }}>
+            {/* <View style={{ padding: 20 }}>
                 <Text style={{ fontWeight: 'bold' }}>Tasks List</Text>
                 <View style={{
                     backgroundColor: '#fff',
@@ -109,10 +109,18 @@ const Main = ({ navigation, route }) => {
                         )}
                     </ScrollView>
                 </View>
-            </View>
+            </View> */}
+            <Image style={styles.image} source={require('../assets/beregr.jpg')} />
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    image:{
+        width:'100%', 
+        height: 300
+    }
+})
 
 export default Main;
 
