@@ -16,8 +16,8 @@
 
 //     }} >
 //         <View style={{ backgroundColor: '#62D2C3' }}>
-//             {/* <Image style={{ marginTop: 100, borderRadius: 45, height: 90, width: 90, alignSelf: 'center' }}
-//                 source={require('../assets/profile.png')} /> */}
+//             <Image style={{ marginTop: 100, borderRadius: 45, height: 90, width: 90, alignSelf: 'center' }}
+//                 source={require('../assets/beregr.jpg')} />
 //             <Text style={{
 //                 color: '#FFF', fontSize: 18,
 //                 textAlign: 'center', fontWeight: 'bold', marginBottom: 15
@@ -26,8 +26,8 @@
 //         </View>
 
 //         <View style={{}}>
-//             {/* <Image style={{ marginTop: 100, borderRadius: 45, height: 90, width: 90, alignSelf: 'center' }}
-//                 source={require('../assets/profile.png')} /> */}
+//             <Image style={{ marginTop: 100, borderRadius: 45, height: 90, width: 90, alignSelf: 'center' }}
+//                 source={require('../assets/beregr.jpg')} />
 //         </View>
 //         <View style={{ padding: 20 }}>
 //             <Text style={{
@@ -56,26 +56,41 @@
 
 
 //     </View>
+    
 // }
+// const styles = StyleSheet.create({
+//         image:{
+//             innerHeight: 100,
+//         }
+//     })
 
 // export default Main;
 
-
-
-// testing route?.params?.user 
-
-
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, Text, ScrollView } from 'react-native';
+import axios from 'axios';
 
 const Main = ({ navigation, route }) => {
     const user = route?.params?.user || { full_name: 'Guest' };
-    
-    console.log('User Full Name:', user.full_name);
 
-    const [tasks, setTasks] = useState([
-        'Pick the car', 'Watch movies', 'Gym', 'Cooking'
-    ]);
+    const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true); // To show a loading state if needed
+
+    useEffect(() => {
+        // Define an async function to fetch tasks
+        const fetchTasks = async () => {
+            try {
+                const response = await axios.get('https://reqres.in/api/login'); // Replace with your API endpoint
+                setTasks(response.data.tasks); // Assuming the tasks array is in response.data.tasks
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTasks();
+    }, []);
 
     return (
         <View style={{ backgroundColor: '#eee', flex: 1 }}>
@@ -88,7 +103,7 @@ const Main = ({ navigation, route }) => {
                 </Text>
             </View>
 
-            {/* <View style={{ padding: 20 }}>
+            <View style={{ padding: 20 }}>
                 <Text style={{ fontWeight: 'bold' }}>Tasks List</Text>
                 <View style={{
                     backgroundColor: '#fff',
@@ -98,7 +113,9 @@ const Main = ({ navigation, route }) => {
                 }}>
                     <Text style={{ fontWeight: 'bold' }}>Daily Tasks</Text>
                     <ScrollView>
-                        {tasks.length > 0 ? (
+                        {loading ? (
+                            <Text>Loading tasks...</Text>
+                        ) : tasks.length > 0 ? (
                             tasks.map((task, index) => (
                                 <View key={index}>
                                     <Text>{task}</Text>
@@ -109,18 +126,9 @@ const Main = ({ navigation, route }) => {
                         )}
                     </ScrollView>
                 </View>
-            </View> */}
-            <Image style={styles.image} source={require('../assets/beregr.jpg')} />
+            </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    image:{
-        width:'100%', 
-        height: 300
-    }
-})
-
 export default Main;
-

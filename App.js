@@ -2,7 +2,7 @@ import React from 'react';
 import Splash from "./screens/Splash";
 import Signup from './screens/Signup';
 import Login from './screens/Login';
-import Main from './screens/Main'
+import Main from './screens/Main';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,5 +33,7 @@ const App = () => {
 </Stack.Navigator>
 </NavigationContainer>
 }
+
+
 
 export default App ;
