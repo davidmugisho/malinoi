@@ -67,23 +67,24 @@
 // export default Main;
 
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const Main = ({ navigation, route }) => {
     const user = route?.params?.user || { full_name: 'Guest' };
 
     const [tasks, setTasks] = useState([]);
-    const [loading, setLoading] = useState(true); // To show a loading state if needed
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); // Track any errors
 
     useEffect(() => {
-        // Define an async function to fetch tasks
         const fetchTasks = async () => {
             try {
-                const response = await axios.get('https://reqres.in/api/login'); // Replace with your API endpoint
-                setTasks(response.data.tasks); // Assuming the tasks array is in response.data.tasks
+                const response = await axios.get('https://yourapi.com/tasks'); // Replace with your actual tasks endpoint
+                setTasks(response.data.tasks || []); // Ensure tasks is an array, even if empty
             } catch (error) {
                 console.error('Error fetching tasks:', error);
+                setError('Failed to load tasks. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -115,6 +116,8 @@ const Main = ({ navigation, route }) => {
                     <ScrollView>
                         {loading ? (
                             <Text>Loading tasks...</Text>
+                        ) : error ? (
+                            <Text style={{ color: 'red' }}>{error}</Text>
                         ) : tasks.length > 0 ? (
                             tasks.map((task, index) => (
                                 <View key={index}>
