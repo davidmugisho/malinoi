@@ -73,7 +73,7 @@
 
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ViewComponent, Image , Apptex} from 'react-native';
 
 const Main = ({ route }) => {
     const user = route?.params?.user || { full_name: 'Guest' };
@@ -97,10 +97,15 @@ const Main = ({ route }) => {
                     elevation: 2,
                     borderRadius: 10
                 }}>
-                    <Text style={{ fontWeight: 'bold' }}>Enjoy your experience!</Text>
+                    <Text style={{ fontWeight: 'bold' }}>Enjoy your experience with us !</Text>
                 </View>
             </View>
-        </View>
+            <View >
+            <Image style={{  width:'100%', height:300
+            }} source={require('../assets/beregr.jpg')}/>
+            <Apptex>Berger allemand </Apptex>
+            </View>
+        </View> 
     );
 };
 
